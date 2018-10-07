@@ -1,5 +1,9 @@
 var ready = require("./ready.js");
+var users = require("../users.js");
 exports.run = (client, message, args) => {
-  message.channel.send("test! " + ready.party);
-  console.log(ready.party);
+  async function test(){
+    await users.setWeapon(message.author, args, "equippedWeapon");
+    console.log("Tried to set it to " + args);
+  }
+  test();
 }

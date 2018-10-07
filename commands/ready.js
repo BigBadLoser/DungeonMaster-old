@@ -1,7 +1,8 @@
 var party = [];
+var maxPartySize = 2;
 module.exports.party = party;
 exports.run = (client, message, args) => {
-  message.channel.send(message.author + " has readied up");
+  message.channel.send("DEBUG: " + message.author + " has readied up");
   party.push(message.author);
   var i, partyMembersDisplay = "";
   if (party.length > 1){
@@ -15,5 +16,8 @@ exports.run = (client, message, args) => {
     }
   }
   else {partyMembersDisplay += message.author.username;}
-  message.channel.send("The current party is: " + partyMembersDisplay + " (" + party.length + "/2)");
+  if (party.length == maxPartySize){
+    boss.spawnNew();
+  }
+  message.channel.send("The current party is: " + partyMembersDisplay + " (" + party.length + "/" + maxPartySize + ")");
 }

@@ -1,0 +1,23 @@
+{
+  "slime": {
+    "name": "Slime",
+    "level": 1,
+    "color": "#00FF00",
+    "description": "A slimy, bouncing mess with weak attacks",
+    "rewards":
+  },
+  "goblin": {
+    "name": "Goblin",
+    "level": 2,
+    "color": "#00FF00",
+    "description": "",
+    "rewards": ""
+  },
+  "orc": {
+    "name": "Orc",
+    "level": 3,
+    "color": "#00FF00",
+    "description": "",
+    "rewards": ""
+  }
+}

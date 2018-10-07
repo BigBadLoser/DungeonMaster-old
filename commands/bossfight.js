@@ -1,9 +1,5 @@
 var users = require("../users.js");
+var boss = require("../boss.js");
 exports.run = (client, message, args) => {
-    async function sendMessage(){
-      //users.create(message.author);
-      //users.setWeapon(message.author, "Sword of the Cosmos");
-      message.channel.send(await users.getWeapon(message.author));
-    }
-    sendMessage();
+  message.channel.send(boss.getEmbed("slime"));
 }

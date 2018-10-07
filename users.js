@@ -1,11 +1,17 @@
 const Enmap = require('enmap');
-const db = new Enmap({ name: 'userData' });
+const db = new Enmap({
+  name: "userData",
+  autoFetch: true,
+  fetchAll: true
+});
 const userStructure = {
   userObject: "",
   level: "",
-  equippedWeapon: "",
+  equippedWeapon: "Basic Sword",
   equippedSpellbook: "",
-  inventory: []
+  inventory: [],
+  xp: 0,
+  level: 1
 }
 module.exports = {
   test: async function(){
@@ -18,11 +24,15 @@ module.exports = {
   },
   setWeapon: async function(user, weapon){
     await db.defer;
-    db.set(user.id, weapon);
+    db.set(user.id, weapon, "equippedWeapon");
   },
   getWeapon: async function(user){
     await db.defer;
-    var returnMe =  db.get(user.id);
-    return returnMe;
+    return (db.get(user.id, "equippedWeapon"));
+  },
+  setLevel: async function(user, newLevel){
+    await db.defer;
+    //db.set(user.id, )
   }
+
 }
