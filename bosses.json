@@ -4,7 +4,7 @@
     "level": 1,
     "color": "#00FF00",
     "description": "A slimy, bouncing mess with weak attacks",
-    "rewards": "This, this, and this"
+    "rewards": "This, this, and this" 
   },
   "goblin": {
     "name": "Goblin",
