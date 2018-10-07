@@ -6,12 +6,12 @@ const db = new Enmap({
 });
 const userStructure = {
   userObject: "",
-  level: "",
   equippedWeapon: "Basic Sword",
-  equippedSpellbook: "",
+  equippedSpellbook: "Necronomicon",
   inventory: [],
   xp: 0,
-  level: 1
+  level: 1,
+  initiativeBonus: 0
 }
 module.exports = {
   test: async function(){
@@ -40,6 +40,14 @@ module.exports = {
   },
   ensure: async function(user){
     db.ensure(user.id, userStructure);
+  },
+  setInitiativeBonus: async function(user, newBonus){
+    await db.defer;
+    db.set(user.id, newBonus, "initiativeBonus");
+  },
+  getInitiativeBonus: async function(user){
+    await db.defer;
+    return(db.get(user.id, "initiativeBonus"));
   }
 
 }

@@ -3,6 +3,7 @@ const bosses = require("./bosses.json");
 const users = require("./users.js");
 //BOSS VARIABLES (1 BOSS AT A TIME, SORRY)
 var bossHealth = 0;
+var currentBoss = "slime";
 
 //Helper function for reading values from our JSON files
 function readFile(bossName, path){
@@ -44,6 +45,6 @@ module.exports = {
     console.log(await getPartyCR(party));
   },
   getCurrentBoss: function(){
-    return "slime";
+    return currentBoss;
   }
 }

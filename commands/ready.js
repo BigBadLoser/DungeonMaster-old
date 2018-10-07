@@ -1,9 +1,10 @@
 var boss = require("../boss.js");
+var users = require("../users.js");
 var party = [];
 var maxPartySize = 2; //TODO: Dynamic party sizing
 module.exports.party = party;
 exports.run = (client, message, args) => {
-  message.channel.send("DEBUG: " + message.author + " has readied up");
+  //message.channel.send("DEBUG: " + message.author + " has readied up");
   party.push(message.author); //Add the user that ran the command to the party array
 
   var i, partyMembersDisplay = "";
@@ -18,13 +19,34 @@ exports.run = (client, message, args) => {
     }
   }
   else {partyMembersDisplay += message.author.username;} //If it has one member only, just display.
-  if (party.length == maxPartySize){ //If the party is full, spawn a new boss
-    console.log(party);
-    boss.spawnNew(party); //("spawn a new boss")
-    message.channel.send(boss.getEmbed(boss.getCurrentBoss())); //and send a message alerting players of the boss
-  }
   //When party changes, display the new party size and its members.
   //Displays "The current party is $user1, $user2, $user3 (3/3")"
   message.channel.send("The current party is: " + partyMembersDisplay + " (" + party.length + "/" + maxPartySize + ")");
 
+  if (party.length == maxPartySize){ //If the party is full, spawn a new boss
+    //Roll Initiative for everyone in the party
+    message.channel.send("Rolling Initiative...");
+    async function rollInitiative(){
+      var f;
+      for (f = 0; f < party.length; f++){
+        party[f].initiative = 0; //resets initiative
+        var rollOutcome = Math.floor(Math.random() * 20) + 1; //rolls a d20 for their initiative
+        var initiativeBonus = await users.getInitiativeBonus(party[f]) //gets their init bonus
+        party[f].initiative = +rollOutcome + +initiativeBonus;
+        console.log("OUTCOME: " + initiativeBonus);
+        message.channel.send(party[f]+ " rolled a " + rollOutcome + " + their bonus of " + initiativeBonus + " for a total of " + party[f].initiative);
+        if (f + 1 == party.length){
+          spawnBoss();
+        }
+      }
+    }
+    rollInitiative();
+    party.sort(function(a,b){return a.initiative < b.initiative});
+    console.log("Sorted party");
+
+    function spawnBoss(){
+      boss.spawnNew(party); //("spawn a new boss")
+      message.channel.send(boss.getEmbed(boss.getCurrentBoss())); //and send a message alerting players of the boss
+    }
+  }
 }
