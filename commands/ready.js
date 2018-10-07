@@ -1,3 +1,4 @@
+var boss = require("../boss.js");
 var party = [];
 var maxPartySize = 2;
 module.exports.party = party;
@@ -17,7 +18,10 @@ exports.run = (client, message, args) => {
   }
   else {partyMembersDisplay += message.author.username;}
   if (party.length == maxPartySize){
-    boss.spawnNew();
+    console.log(party);
+    boss.spawnNew(party);
+    boss.getEmbed(boss.getCurrentBoss());
   }
   message.channel.send("The current party is: " + partyMembersDisplay + " (" + party.length + "/" + maxPartySize + ")");
+
 }

@@ -33,6 +33,13 @@ module.exports = {
   setLevel: async function(user, newLevel){
     await db.defer;
     //db.set(user.id, )
+  },
+  getLevel: async function(user){
+    await db.defer;
+    return (db.get(user.id, "level"));
+  },
+  ensure: async function(user){
+    db.ensure(user.id, userStructure);
   }
 
 }

@@ -5,7 +5,8 @@ const fs = require("fs");
 const client = new Discord.Client();
 const config = require("./config.json");
 var users = require('./users.js');
-// We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
+
+
 client.config = config;
 
 fs.readdir("./events/", (err, files) => {
