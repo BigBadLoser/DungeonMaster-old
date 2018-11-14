@@ -32,3 +32,9 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 client.login(config.token);
+
+module.exports = {
+  send: function(msg){
+    message.channel.send(msg);
+  }
+}

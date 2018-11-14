@@ -1,8 +1,17 @@
+const  boss = require("../boss.js");
 module.exports = (client, message) => {
+
   // Ignore all bots
-  if (message.author.bot) return;
+
+  boss.passMessage(message);
+  //if (message.author.bot) return;
 
   // Ignore messages not starting with the prefix (in config.json)
+  if (message.content.startsWith(":grinning:")){
+    //boss.testFunction(message);
+    //boss.setTurnMessage(message);
+  }
+
   if (message.content.indexOf(client.config.prefix) !== 0) return;
 
   // Our standard argument/command name definition.

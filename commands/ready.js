@@ -41,12 +41,11 @@ exports.run = (client, message, args) => {
       }
     }
     rollInitiative();
-    party.sort(function(a,b){return a.initiative < b.initiative});
-    console.log("Sorted party");
 
     function spawnBoss(){
-      boss.spawnNew(party); //("spawn a new boss")
-      message.channel.send(boss.getEmbed(boss.getCurrentBoss())); //and send a message alerting players of the boss
+      //message.channel.send(boss.getEmbed(boss.getCurrentBoss()));
+      boss.startFight(party); //("spawn a new boss")
+      party = [];
     }
   }
 }
